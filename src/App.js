@@ -20,8 +20,9 @@ export function getUrlParams(url = window.location.href) {
 }
 
 export default function App() {
-  const roomID = getUrlParams().get("prasadVcall") || randomID(5);
+  const roomID = getUrlParams().get("roomID") || randomID(5);
   let myMeeting = async (element) => {
+    // generate Kit Token
     const appID = 915454739;
     const serverSecret = "03c43f3896d1df63600876cbed5c34dc";
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
@@ -38,13 +39,13 @@ export default function App() {
       container: element,
       sharedLinks: [
         {
-          name: "Prasad VCall link",
+          name: "Prasad link",
           url:
             window.location.protocol +
             "//" +
             window.location.host +
             window.location.pathname +
-            "?prasadVcall=" +
+            "?roomID=" +
             roomID,
         },
       ],
@@ -59,8 +60,6 @@ export default function App() {
       className="myCallContainer"
       ref={myMeeting}
       style={{ width: "100vw", height: "100vh" }}
-    >
-      Prasad VCalls
-    </div>
+    ></div>
   );
 }
